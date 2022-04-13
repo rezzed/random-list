@@ -1,0 +1,23 @@
+@charset "utf-8";
+@import "bulma/sass/utilities/initial-variables";
+@import "bulma/sass/utilities/functions";
+
+// https://colors.eva.design/
+$primary: #063964;
+
+$info: #184daf;
+$success: #1c8728;
+$warning: #cc9604;
+$danger: #a01417;
+
+// ------------------------------------
+
+$link: $primary;
+$link-invert: findColorInvert($link);
+$link-visited: $link-invert;
+
+// fix focus navbar link color
+$navbar-item-hover-background-color: $primary;
+
+// fix footer background color
+$footer-background-color: $white;

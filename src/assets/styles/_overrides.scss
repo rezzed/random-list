@@ -1,0 +1,32 @@
+@charset "utf-8";
+@import "bulma/sass/utilities/initial-variables";
+@import "vars";
+
+[disabled] {
+  cursor: default !important;
+}
+
+.button.shuffle.is-loading {
+  pointer-events: all;
+  &::after {
+    animation-duration: 360ms;
+    border: 2px solid $grey-darker;
+    border-right-color: transparent;
+    border-top-color: transparent;
+  }
+}
+
+a.version {
+  color: $grey-light;
+  &:hover {
+    color: $primary;
+  }
+}
+
+textarea {
+  min-height: 6em;
+}
+
+.user-select-none {
+  user-select: none;
+}
