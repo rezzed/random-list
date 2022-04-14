@@ -15,6 +15,7 @@ import LinkButton from '@/components/LinkButton.vue';
             </p>
             <ul>
               <li>Use it for your daily scrum meeting</li>
+              <li>Use it for your next virtual card game evening</li>
               <li>Share the lists URL so anyone can use the prefilled list</li>
               <li>Everything happens in your browser and stays in your browser</li>
               <li>No private data sent to any server</li>

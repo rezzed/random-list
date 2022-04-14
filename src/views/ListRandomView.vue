@@ -57,7 +57,7 @@ onMounted(randomiseList);
 <template>
   <div class="content">
     <div class="field">
-      <label for="random-list-ta" class="label">Copy the random list</label>
+      <label for="random-list-ta" class="label">The randomised entries</label>
       <div class="control">
         <textarea
           id="random-list-ta"

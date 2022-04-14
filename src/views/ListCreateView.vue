@@ -55,7 +55,7 @@ function sortList() {
   <div class="content">
     <div class="field">
       <label for="create-list-ta" class="label is-flex is-justify-content-space-between">
-        <span>Create a list of unique entries</span>
+        <span>Enter the entries to randomise</span>
         <span class="tag is-primary has-text-weight-normal" title="Number of unique entries">
           {{ entries.count }}
         </span>
