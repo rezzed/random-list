@@ -1,6 +1,6 @@
 # random-list Changelog
 
-## 0.9.1 (next)
+## 0.9.1 (2022-04-14)
 
 Preview release
 
