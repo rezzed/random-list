@@ -40,7 +40,7 @@ watch(
   { immediate: true },
 );
 
-function newList() {
+function clearList() {
   if (input.value) {
     router.push({ name: 'list-create', hash: '' }).catch(NOOP);
   }
@@ -88,10 +88,10 @@ function sortList() {
       <div class="buttons">
         <button
           class="button"
-          @click="newList"
+          @click="clearList"
           title="Clears the current list and creates a new one. The old list is still available in your browsing history."
         >
-          New list
+          Clear list
         </button>
         <button
           class="button"
