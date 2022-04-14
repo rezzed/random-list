@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useClipboard, useShare } from '@vueuse/core';
+import { useOptionsStore } from '@/store';
 import SvgIcon from '@/components/SvgIcon.vue';
 import { SvgIconPathName } from '@/components/SvgIconPathName';
 
 const props = defineProps<{ value: string; disabled?: boolean }>();
 
+const options = useOptionsStore();
 const { copy, copied, isSupported: isClipboardSupported } = useClipboard();
 const { share, isSupported: isShareSupported } = useShare();
 
-const disabled = computed(
+const isDisabled = computed(
   () => !!(props.disabled || copied.value || (!isShareSupported && !isClipboardSupported)),
 );
 
 const title = computed(() => {
-  if (isShareSupported) {
+  if (isShareSupported && options.isShareButtonEnabled) {
     return 'Click to share the text.';
   }
   if (isClipboardSupported) {
@@ -31,7 +33,7 @@ const state = computed(() => {
 
   if (copied.value) {
     icon = 'mdiClipboardCheckMultiple';
-  } else if (isShareSupported) {
+  } else if (isShareSupported && options.isShareButtonEnabled) {
     icon = 'mdiShare';
     label = 'Share';
   }
@@ -40,7 +42,7 @@ const state = computed(() => {
 });
 
 function copyOrShare() {
-  if (isShareSupported) {
+  if (isShareSupported && options.isShareButtonEnabled) {
     share({ text: props.value });
   } else {
     copy(props.value);
@@ -49,7 +51,7 @@ function copyOrShare() {
 </script>
 
 <template>
-  <button class="button is-primary" :disabled="disabled" @click="copyOrShare" :title="title">
+  <button class="button is-primary" :disabled="isDisabled" @click="copyOrShare" :title="title">
     <SvgIcon :name="state.icon"></SvgIcon>
     <span class="is-hidden-mobile">{{ state.label }} <slot></slot></span>
     <span class="is-hidden-tablet">{{ state.label }}</span>

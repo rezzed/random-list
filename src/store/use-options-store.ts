@@ -1,10 +1,10 @@
 import { computed, ComputedRef, Ref, watch } from 'vue';
 import { defineStore } from 'pinia';
-import { StorageSerializers, useStorage } from '@vueuse/core';
+import { StorageSerializers, useShare, useStorage } from '@vueuse/core';
 import { useSelectedEntriesStore } from '@/store/use-selected-entries-store';
 
 /** A set of state value, getter value and toggle action */
-type ToggleOption = [Ref<true | null>, ComputedRef<boolean>, () => void];
+type ToggleOption = [Ref<true | null>, ComputedRef<boolean>, () => void, ComputedRef<boolean>];
 
 // ------------------------------------
 
@@ -18,13 +18,29 @@ export const useOptionsStore = defineStore('options', () => {
     },
   );
 
+  // is the button "Share" instead of "Copy" enabled and available?
+  const [
+    rawShareButtonEnabled,
+    isShareButtonEnabled,
+    toggleShareButtonEnabled,
+    canShareButtonBeEnabled,
+  ] = createToggleOption('shareButtonEnabled', undefined, undefined, () => {
+    const { isSupported } = useShare();
+    return isSupported;
+  });
+
+  // ----------------------------------
   return {
     // state
     rawListSelectEnabled,
+    rawShareButtonEnabled,
     // getters
     isListSelectEnabled,
+    isShareButtonEnabled,
+    canShareButtonBeEnabled,
     // actions
     toggleListSelectEnabled,
+    toggleShareButtonEnabled,
   };
 });
 
@@ -36,20 +52,25 @@ export const useOptionsStore = defineStore('options', () => {
  * @param key The storage key of the option, should be unique.
  * @param disableCallback Called when the option gets disabled. Use to toggle and remove other stored values.
  * @param enableCallback Called when the option gets enabled.
+ * @param checkCanBeEnabled Function that returns a boolean and is used to check if the conditions
+ * are met to allow the current option.
  */
 
 function createToggleOption(
   key: string,
   disableCallback?: () => void,
   enableCallback?: () => void,
+  checkCanBeEnabled?: () => boolean,
 ): ToggleOption {
   const rawEnabled = useStorage<true | null>(key, null, undefined, {
     serializer: StorageSerializers.boolean,
   });
 
   const isEnabled = computed(() => !!rawEnabled.value);
+  const canBeEnabled = computed(() => (checkCanBeEnabled ? checkCanBeEnabled() : true));
 
   if (disableCallback || enableCallback) {
+    // if a callback is required, watch the option toggling
     watch(
       isEnabled,
       (value) => {
@@ -57,6 +78,19 @@ function createToggleOption(
           enableCallback();
         } else if (!value && disableCallback) {
           disableCallback();
+        }
+      },
+      { immediate: true },
+    );
+  }
+
+  if (checkCanBeEnabled) {
+    // disable the option if it cannot be enabled
+    watch(
+      canBeEnabled,
+      (value) => {
+        if (!value && rawEnabled.value) {
+          rawEnabled.value = null;
         }
       },
       { immediate: true },
@@ -71,5 +105,5 @@ function createToggleOption(
     }
   }
 
-  return [rawEnabled, isEnabled, toggleEnabled];
+  return [rawEnabled, isEnabled, toggleEnabled, canBeEnabled];
 }
