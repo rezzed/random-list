@@ -1,4 +1,5 @@
-import { createRouter, createWebHashHistory, RouteLocationRaw, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import type { RouteLocationRaw, RouteRecordRaw } from 'vue-router';
 import { useTitle } from '@vueuse/core';
 import { useEntriesStore, useOptionsStore } from '@/store';
 

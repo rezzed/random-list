@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useClipboard, useShare } from '@vueuse/core';
 import { useOptionsStore } from '@/store';
 import SvgIcon from '@/components/SvgIcon.vue';
-import { SvgIconPathName } from '@/components/SvgIconPathName';
+import type { SvgIconPathName } from '@/components/SvgIconPathName';
 
 const props = defineProps<{ value: string; disabled?: boolean }>();
 

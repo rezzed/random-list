@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { computed, PropType } from 'vue';
-import { svgIconPathMap, SvgIconPathName } from '@/components/SvgIconPathName';
+import { computed } from 'vue';
+import type { PropType } from 'vue';
+import { svgIconPathMap } from '@/components/SvgIconPathName';
+import type { SvgIconPathName } from '@/components/SvgIconPathName';
 
 const props = defineProps({
   name: {

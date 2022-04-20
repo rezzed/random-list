@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 import { useEntriesStore } from '@/store';
 import ShareCopyButton from '@/components/ShareCopyButton.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
-import { SvgIconPathName } from '@/components/SvgIconPathName';
+import type { SvgIconPathName } from '@/components/SvgIconPathName';
 
 const router = useRouter();
 const entries = useEntriesStore();

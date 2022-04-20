@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import SvgIcon from '@/components/SvgIcon.vue';
-import { SvgIconPathName } from '@/components/SvgIconPathName';
+import type { SvgIconPathName } from '@/components/SvgIconPathName';
 
 const props = defineProps<{ selected: boolean }>();
 const iconName = computed<SvgIconPathName>(() =>

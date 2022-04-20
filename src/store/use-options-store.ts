@@ -1,4 +1,5 @@
-import { computed, ComputedRef, Ref, watch } from 'vue';
+import { computed, watch } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import { defineStore } from 'pinia';
 import { StorageSerializers, useShare, useStorage } from '@vueuse/core';
 import { useSelectedEntriesStore } from '@/store/use-selected-entries-store';
