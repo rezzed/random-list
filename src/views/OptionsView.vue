@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useOptionsStore } from '@/store';
-import OptionsBox from '@/components/OptionsBox.vue';
-
-const options = useOptionsStore();
+import OptionListSelect from '@/components/options/OptionListSelect.vue';
+import OptionShareButton from '@/components/options/OptionShareButton.vue';
 </script>
 
 <template>
@@ -26,43 +24,8 @@ const options = useOptionsStore();
               </div>
 
               <div class="tile is-vertical is-parent">
-                <OptionsBox
-                  :selected="options.isListSelectEnabled"
-                  @toggle="options.toggleListSelectEnabled"
-                >
-                  <template #title>Enable list entries selection</template>
-                  <template #default>
-                    This adds an additional tab &quot;Select list entries&quot; between &quot;Create
-                    list entries&quot; and &quot;Randomise list entries&quot; where each list entry
-                    can be selected or deselected by simply clicking it. The selection will be
-                    persisted in the local storage of your browser and shared across browser tabs
-                    and lists.
-                  </template>
-                </OptionsBox>
-
-                <OptionsBox
-                  :selected="options.isShareButtonEnabled"
-                  :enabled="options.canShareButtonBeEnabled"
-                  @toggle="options.toggleShareButtonEnabled"
-                >
-                  <template #title>Enable share button</template>
-                  <template #default>
-                    <article
-                      v-if="!options.canShareButtonBeEnabled"
-                      class="message is-danger is-small"
-                    >
-                      <div class="message-body">
-                        <strong>Note:</strong> This option needs the Web Share API, which is not
-                        available on your device.
-                      </div>
-                    </article>
-
-                    <p>
-                      The &quot;Copy&quot; button will be replaced with a &quot;Share&quot; button,
-                      which uses the Web Share API to open the native share menu of your device.
-                    </p>
-                  </template>
-                </OptionsBox>
+                <OptionListSelect></OptionListSelect>
+                <OptionShareButton></OptionShareButton>
               </div>
             </div>
           </div>
