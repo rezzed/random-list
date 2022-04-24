@@ -1,24 +1,17 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { refAutoReset } from '@vueuse/core';
 import { useEntriesStore, useSelectedEntriesStore } from '@/store';
 import LinkButton from '@/components/LinkButton.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
+import ThrottledButton from '@/components/ThrottledButton.vue';
 import ToggleButton from '@/components/ToggleButton.vue';
 
 const entries = useEntriesStore();
 const selectedEntries = useSelectedEntriesStore();
 
-const isToggleDisabled = refAutoReset(false, 500);
 const shouldSelectAll = computed(() => selectedEntries.count < entries.count);
 
 function toggleSelection() {
-  // prevent double-clicks
-  if (isToggleDisabled.value) {
-    return;
-  }
-  isToggleDisabled.value = true;
-
   if (shouldSelectAll.value) {
     selectedEntries.selectAllEntries();
   } else {
@@ -58,9 +51,9 @@ function toggleSelection() {
   </div>
 
   <div class="content is-flex is-justify-content-space-between">
-    <button class="button" @click="toggleSelection" :disabled="entries.isEmpty || isToggleDisabled">
+    <ThrottledButton @click="toggleSelection" :disabled="entries.isEmpty">
       {{ shouldSelectAll ? 'Select all entries' : 'Select no entries' }}
-    </button>
+    </ThrottledButton>
 
     <LinkButton
       :to="{ name: 'list-random', hash: entries.hash }"

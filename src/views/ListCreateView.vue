@@ -6,6 +6,7 @@ import { NOOP } from '@/utils/noop';
 import LinkButton from '@/components/LinkButton.vue';
 import ShareList from '@/components/ShareList.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
+import ThrottledButton from '@/components/ThrottledButton.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -86,20 +87,18 @@ function sortList() {
   <div class="content is-flex is-justify-content-space-between">
     <div>
       <div class="buttons">
-        <button
-          class="button"
+        <ThrottledButton
           @click="clearList"
           title="Clears the current list and creates a new one. The old list is still available in your browsing history."
         >
           Clear list
-        </button>
-        <button
-          class="button"
+        </ThrottledButton>
+        <ThrottledButton
           @click="sortList"
           title="Sort the list alphabetically, remove duplicates and exceeding whitespace."
         >
           Sort list
-        </button>
+        </ThrottledButton>
       </div>
     </div>
     <LinkButton
