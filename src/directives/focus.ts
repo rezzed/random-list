@@ -1,8 +1,10 @@
+import type { ObjectDirective } from 'vue';
+
 /**
- * Focus the current element when mounted.
+ * Directive to focus the current element when mounted.
  */
-export const focus = {
-  mounted: (el: HTMLElement) => {
+export const focus: ObjectDirective<HTMLElement> = {
+  mounted: (el) => {
     el.focus();
   },
 };

@@ -1,13 +1,15 @@
+import type { ObjectDirective } from 'vue';
+
 /**
- * This should prevent the accidental dragging of links that
+ * Directive to prevent the accidental dragging of links that
  * look like buttons (and any other element) in chrome and firefox.
  */
-export const noDrag = {
-  beforeMount: (el: HTMLElement) => {
+export const noDrag: ObjectDirective<HTMLElement> = {
+  beforeMount: (el) => {
     el.draggable = false;
     el.addEventListener('dragstart', dragstartHandler);
   },
-  beforeUnmount: (el: HTMLElement) => {
+  beforeUnmount: (el) => {
     el.removeEventListener('dragstart', dragstartHandler);
   },
 };
