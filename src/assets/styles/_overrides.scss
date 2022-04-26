@@ -1,9 +1,15 @@
 @charset "utf-8";
 @import "bulma/sass/utilities/initial-variables";
 @import "vars";
+@import "bulma/sass/form/shared";
 
 [disabled] {
   cursor: default !important;
+}
+
+.select.is-disabled::after {
+  opacity: 0.3;
+  border-color: $input-hover-color !important;
 }
 
 .button.shuffle.is-loading {
