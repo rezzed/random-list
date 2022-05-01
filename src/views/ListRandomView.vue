@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
 import { refDebounced, useIntervalFn, useMousePressed } from '@vueuse/core';
-import { useSelectedEntriesStore } from '@/store';
+import { useOptionBgAnimationStore, useSelectedEntriesStore } from '@/store';
 import { shuffleArray } from '@/utils/shuffle-array';
 import { arrayHasSameOrder } from '@/utils/array-has-same-order';
 import ShareCopyButton from '@/components/ShareCopyButton.vue';
 
 const selectedEntries = useSelectedEntriesStore();
+const optionBgAnimation = useOptionBgAnimationStore();
 
 const randomEntries = ref(selectedEntries.selected.concat());
 const randomEntriesAsText = computed(() => randomEntries.value.join('\n'));
@@ -17,6 +18,8 @@ const { pressed: isMousePressed } = useMousePressed({ target: shuffleButtonEleme
 // ...that's why we debounce this before we treat the button as "held down".
 // isMouseButtonHeldDown is used to show the spinner icon on the shuffle button.
 const isMouseButtonHeldDown = refDebounced(isMousePressed, 240);
+
+const showSpinnerAnimation = computed(() => isMousePressed.value && isMouseButtonHeldDown.value);
 
 // a 120ms interval looks like a nice re-shuffle animation
 const reShuffleInterval = useIntervalFn(randomiseList, 120, { immediate: false });
@@ -51,6 +54,10 @@ watch(isMousePressed, (value) => {
   }
 });
 
+watch(showSpinnerAnimation, (value) => {
+  optionBgAnimation.setPlaying(value);
+});
+
 onMounted(randomiseList);
 </script>
 
@@ -78,7 +85,7 @@ onMounted(randomiseList);
   <div class="content is-flex is-justify-content-space-between">
     <button
       class="button shuffle"
-      :class="{ 'is-loading': isMouseButtonHeldDown && isMousePressed }"
+      :class="{ 'is-loading': showSpinnerAnimation }"
       ref="shuffleButtonElement"
       @click="randomiseList"
       :disabled="selectedEntries.isEmpty"
