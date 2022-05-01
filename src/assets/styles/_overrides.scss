@@ -12,6 +12,18 @@
   border-color: $input-hover-color !important;
 }
 
+button.button.is-disabled {
+  background-color: $input-disabled-background-color;
+  border-color: $input-disabled-border-color;
+  box-shadow: none;
+}
+
+button.button.is-disabled,
+label.label.is-disabled {
+  opacity: 0.5;
+  color: $input-disabled-color;
+}
+
 .button.shuffle.is-loading {
   pointer-events: all;
   &::after {
@@ -27,6 +39,10 @@ a.version {
   &:hover {
     color: $primary;
   }
+}
+
+.navbar a {
+  transition: background-color 300ms linear;
 }
 
 textarea {
