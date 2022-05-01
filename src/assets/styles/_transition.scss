@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+.fade-enter-active {
+  animation: fade-in 300ms linear;
+}
+
+.fade-leave-active {
+  animation: fade-in 300ms linear reverse;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
