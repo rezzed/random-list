@@ -3,6 +3,7 @@ import type { ComputedRef, Ref } from 'vue';
 import { defineStore } from 'pinia';
 import { StorageSerializers, useShare, useStorage } from '@vueuse/core';
 import { useSelectedEntriesStore } from '@/store/use-selected-entries-store';
+import { useOptionBgAnimationStore } from '@/store/use-option-bg-animation-store';
 
 /** A set of state value, getter value and toggle action */
 type ToggleOption = [Ref<true | null>, ComputedRef<boolean>, () => void, ComputedRef<boolean>];
@@ -19,6 +20,20 @@ export const useOptionsStore = defineStore('options', () => {
     },
   );
 
+  // is an animated background available when rendomising the list entries?
+  const [rawBgAnimationEnabled, isBgAnimationEnabled, toggleBgAnimationEnabled] =
+    createToggleOption(
+      'bgAnimationEnabled',
+      () => {
+        const optionBgAnimation = useOptionBgAnimationStore();
+        optionBgAnimation.disable();
+      },
+      () => {
+        const optionBgAnimation = useOptionBgAnimationStore();
+        optionBgAnimation.enable();
+      },
+    );
+
   // is the button "Share" instead of "Copy" enabled and available?
   const [
     rawShareButtonEnabled,
@@ -34,13 +49,16 @@ export const useOptionsStore = defineStore('options', () => {
   return {
     // state
     rawListSelectEnabled,
+    rawBgAnimationEnabled,
     rawShareButtonEnabled,
     // getters
     isListSelectEnabled,
+    isBgAnimationEnabled,
     isShareButtonEnabled,
     canShareButtonBeEnabled,
     // actions
     toggleListSelectEnabled,
+    toggleBgAnimationEnabled,
     toggleShareButtonEnabled,
   };
 });
