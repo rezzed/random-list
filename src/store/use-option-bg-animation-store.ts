@@ -86,7 +86,7 @@ export const useOptionBgAnimationStore = defineStore('optionBgAnimation', {
       return this.canPlay ? this.rawPlaying : false;
     },
     playingComp(): string | null {
-      return this.isPlaying ? `bg-animation/${this.selected.comp}` : null;
+      return this.isPlaying ? this.selected.comp : null;
     },
   },
 
