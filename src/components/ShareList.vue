@@ -46,7 +46,14 @@ function toggleExpanded() {
               </button>
             </p>
             <div class="control is-expanded">
-              <input id="share-ti" class="input" type="text" v-model="shareUrl" readonly v-focus />
+              <input
+                id="share-ti"
+                class="input"
+                type="text"
+                v-model="shareUrl"
+                readonly
+                v-select-on-focus
+              />
             </div>
             <div class="control">
               <ShareCopyButton :value="shareUrl">url</ShareCopyButton>

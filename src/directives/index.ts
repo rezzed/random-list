@@ -1,12 +1,12 @@
 import type { Plugin } from 'vue';
-import { focus } from './focus';
 import { noDrag } from './no-drag';
+import { selectOnFocus } from './select-on-focus';
 import { visible } from './visible';
 
 const directives: Plugin = {
   install: (app) => {
-    app.directive('focus', focus);
     app.directive('no-drag', noDrag);
+    app.directive('select-on-focus', selectOnFocus);
     app.directive('visible', visible);
   },
 };

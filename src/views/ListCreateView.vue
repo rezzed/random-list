@@ -71,7 +71,6 @@ function sortList() {
           autocapitalize="off"
           autocorrect="off"
           spellcheck="false"
-          v-focus
         ></textarea>
       </div>
       <p class="help">

@@ -73,7 +73,7 @@ onMounted(randomiseList);
           placeholder="The list is empty"
           rows="10"
           readonly
-          v-focus
+          v-select-on-focus
         ></textarea>
       </div>
       <p class="help">
