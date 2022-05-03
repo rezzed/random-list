@@ -8,6 +8,9 @@ export default defineConfig({
   base: '',
   build: {
     outDir: 'docs',
+    // Until the "optional-components" CSS becomes larger,
+    // it is better to have all styles in one file.
+    cssCodeSplit: false,
   },
   plugins: [vue()],
   define: {
