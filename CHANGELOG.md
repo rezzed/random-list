@@ -3,6 +3,7 @@
 ## next
 
 - Changed text input focus behaviour to select all text on focus.
+- Added a music option, and some weird sounding chiptunes.
 
 ## 1.0.0 (2022-05-01)
 
@@ -16,7 +17,7 @@ Initial release
 Preview release
 
 - Removed auto-scroll as it did not work as expected on a smartphone.
-- Renamed button "New list" to "Clear list".
+- Renamed the button "New list" to "Clear list".
 - Added and changed some texts.
 - Made the "Share" button a selectable option.
 

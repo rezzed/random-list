@@ -9,12 +9,13 @@ const selectModel = useVModel(props, 'modelValue', emit);
 
 <template>
   <div class="field has-addons">
-    <div v-if="label || $slots.label || $slots.start" class="control">
-      <slot name="start">
-        <button class="button is-static" :class="{ 'is-disabled': disabled }">
-          <slot name="label">{{ label }}</slot>
-        </button>
-      </slot>
+    <div v-if="label || $slots.label" class="control">
+      <button class="button is-static" :class="{ 'is-disabled': disabled }">
+        <slot name="label">{{ label }}</slot>
+      </button>
+    </div>
+    <div v-if="$slots.start" class="control">
+      <slot name="start"></slot>
     </div>
     <div class="control is-expanded">
       <div class="select is-fullwidth" :class="{ 'is-disabled': disabled }">

@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
 import { refDebounced, useIntervalFn, useMousePressed } from '@vueuse/core';
-import { useOptionBgAnimationStore, useSelectedEntriesStore } from '@/store';
+import { useOptionAudioStore, useOptionBgAnimationStore, useSelectedEntriesStore } from '@/store';
 import { shuffleArray } from '@/utils/shuffle-array';
 import { arrayHasSameOrder } from '@/utils/array-has-same-order';
 import ShareCopyButton from '@/components/ShareCopyButton.vue';
 
 const selectedEntries = useSelectedEntriesStore();
 const optionBgAnimation = useOptionBgAnimationStore();
+const optionAudio = useOptionAudioStore();
 
 const randomEntries = ref(selectedEntries.selected.concat());
 const randomEntriesAsText = computed(() => randomEntries.value.join('\n'));
@@ -56,6 +57,7 @@ watch(isMousePressed, (value) => {
 
 watch(showSpinnerAnimation, (value) => {
   optionBgAnimation.setPlaying(value);
+  optionAudio.setPlaying(value);
 });
 
 onMounted(randomiseList);

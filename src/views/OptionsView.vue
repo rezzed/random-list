@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import OptionAudio from '@/components/options/OptionAudio.vue';
 import OptionBgAnimation from '@/components/options/OptionBgAnimation.vue';
 import OptionListSelect from '@/components/options/OptionListSelect.vue';
 import OptionShareButton from '@/components/options/OptionShareButton.vue';
@@ -27,6 +28,7 @@ import OptionShareButton from '@/components/options/OptionShareButton.vue';
               <div class="tile is-vertical is-parent">
                 <OptionListSelect></OptionListSelect>
                 <OptionBgAnimation></OptionBgAnimation>
+                <OptionAudio></OptionAudio>
                 <OptionShareButton></OptionShareButton>
               </div>
             </div>

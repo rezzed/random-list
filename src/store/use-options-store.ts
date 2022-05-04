@@ -3,6 +3,7 @@ import type { ComputedRef, Ref } from 'vue';
 import { defineStore } from 'pinia';
 import { StorageSerializers, useShare, useStorage } from '@vueuse/core';
 import { useSelectedEntriesStore } from '@/store/use-selected-entries-store';
+import { useOptionAudioStore } from '@/store/use-option-audio-store';
 import { useOptionBgAnimationStore } from '@/store/use-option-bg-animation-store';
 
 /** A set of state value, getter value and toggle action */
@@ -34,6 +35,19 @@ export const useOptionsStore = defineStore('options', () => {
       },
     );
 
+  // is audio available when rendomising the list entries?
+  const [rawAudioEnabled, isAudioEnabled, toggleAudioEnabled] = createToggleOption(
+    'audioEnabled',
+    () => {
+      const optionAudio = useOptionAudioStore();
+      optionAudio.disable();
+    },
+    () => {
+      const optionAudio = useOptionAudioStore();
+      optionAudio.enable();
+    },
+  );
+
   // is the button "Share" instead of "Copy" enabled and available?
   const [
     rawShareButtonEnabled,
@@ -50,15 +64,18 @@ export const useOptionsStore = defineStore('options', () => {
     // state
     rawListSelectEnabled,
     rawBgAnimationEnabled,
+    rawAudioEnabled,
     rawShareButtonEnabled,
     // getters
     isListSelectEnabled,
     isBgAnimationEnabled,
+    isAudioEnabled,
     isShareButtonEnabled,
     canShareButtonBeEnabled,
     // actions
     toggleListSelectEnabled,
     toggleBgAnimationEnabled,
+    toggleAudioEnabled,
     toggleShareButtonEnabled,
   };
 });
