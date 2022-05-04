@@ -48,6 +48,13 @@ export const useOptionsStore = defineStore('options', () => {
     },
   );
 
+  // is the button "Randomise list" instead of "Re-randomise list" enabled?
+  const [rawRandomiseButtonEnabled, isRandomiseButtonEnabled, toggleRandomiseButtonEnabled] =
+    createToggleOption('randomiseButtonEnabled');
+  const randomiseButtonLabel = computed(() =>
+    isRandomiseButtonEnabled.value ? 'Randomise list' : 'Re-randomise list',
+  );
+
   // is the button "Share" instead of "Copy" enabled and available?
   const [
     rawShareButtonEnabled,
@@ -65,17 +72,21 @@ export const useOptionsStore = defineStore('options', () => {
     rawListSelectEnabled,
     rawBgAnimationEnabled,
     rawAudioEnabled,
+    rawRandomiseButtonEnabled,
     rawShareButtonEnabled,
     // getters
     isListSelectEnabled,
     isBgAnimationEnabled,
     isAudioEnabled,
+    isRandomiseButtonEnabled,
+    randomiseButtonLabel,
     isShareButtonEnabled,
     canShareButtonBeEnabled,
     // actions
     toggleListSelectEnabled,
     toggleBgAnimationEnabled,
     toggleAudioEnabled,
+    toggleRandomiseButtonEnabled,
     toggleShareButtonEnabled,
   };
 });

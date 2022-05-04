@@ -4,6 +4,7 @@
 
 - Changed text input focus behaviour to select all text on focus.
 - Added a music option, and some weird sounding chiptunes.
+- Added option to disable implicit randomisation when "Randomise list entries" tab is selected.
 
 ## 1.0.0 (2022-05-01)
 

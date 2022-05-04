@@ -73,8 +73,8 @@ function stopAnimation() {
     <template #title>Enable background animations</template>
     <template #default>
       <p>
-        When the &quot;Re-randomise list&quot; button is held down in the &quot;Randomise list
-        entries&quot; tab, the background will be animated.
+        When the &quot;{{ options.randomiseButtonLabel }}&quot; button is held down in the
+        &quot;Randomise list entries&quot; tab, the background will be animated.
       </p>
 
       <div class="field">

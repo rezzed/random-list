@@ -79,8 +79,8 @@ function stopAudio() {
     <template #title>Enable music</template>
     <template #default>
       <p>
-        When the &quot;Re-randomise list&quot; button is held down in the &quot;Randomise list
-        entries&quot; tab, a piece of music is played.
+        When the &quot;{{ options.randomiseButtonLabel }}&quot; button is held down in the
+        &quot;Randomise list entries&quot; tab, a piece of music is played.
       </p>
 
       <div class="field">

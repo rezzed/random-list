@@ -2,6 +2,7 @@
 import OptionAudio from '@/components/options/OptionAudio.vue';
 import OptionBgAnimation from '@/components/options/OptionBgAnimation.vue';
 import OptionListSelect from '@/components/options/OptionListSelect.vue';
+import OptionRandomiseButton from '@/components/options/OptionRandomiseButton.vue';
 import OptionShareButton from '@/components/options/OptionShareButton.vue';
 </script>
 
@@ -29,6 +30,7 @@ import OptionShareButton from '@/components/options/OptionShareButton.vue';
                 <OptionListSelect></OptionListSelect>
                 <OptionBgAnimation></OptionBgAnimation>
                 <OptionAudio></OptionAudio>
+                <OptionRandomiseButton></OptionRandomiseButton>
                 <OptionShareButton></OptionShareButton>
               </div>
             </div>

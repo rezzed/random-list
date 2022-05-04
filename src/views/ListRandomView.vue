@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
 import { refDebounced, useIntervalFn, useMousePressed } from '@vueuse/core';
-import { useOptionAudioStore, useOptionBgAnimationStore, useSelectedEntriesStore } from '@/store';
+import {
+  useOptionAudioStore,
+  useOptionBgAnimationStore,
+  useOptionsStore,
+  useSelectedEntriesStore,
+} from '@/store';
 import { shuffleArray } from '@/utils/shuffle-array';
 import { arrayHasSameOrder } from '@/utils/array-has-same-order';
 import ShareCopyButton from '@/components/ShareCopyButton.vue';
 
+const options = useOptionsStore();
 const selectedEntries = useSelectedEntriesStore();
 const optionBgAnimation = useOptionBgAnimationStore();
 const optionAudio = useOptionAudioStore();
@@ -60,13 +66,21 @@ watch(showSpinnerAnimation, (value) => {
   optionAudio.setPlaying(value);
 });
 
-onMounted(randomiseList);
+onMounted(() => {
+  if (!options.isRandomiseButtonEnabled) {
+    randomiseList();
+  }
+});
 </script>
 
 <template>
   <div class="content">
     <div class="field">
-      <label for="random-list-ta" class="label">The randomised entries</label>
+      <label for="random-list-ta" class="label">
+        {{
+          options.isRandomiseButtonEnabled ? 'The entries to randomise' : 'The randomised entries'
+        }}
+      </label>
       <div class="control">
         <textarea
           id="random-list-ta"
@@ -79,8 +93,8 @@ onMounted(randomiseList);
         ></textarea>
       </div>
       <p class="help">
-        When the &quot;Re-randomise list&quot; button is held down, the list entries will be
-        randomised multiple times.
+        When the &quot;{{ options.randomiseButtonLabel }}&quot; button is held down, the list
+        entries will be randomised multiple times.
       </p>
     </div>
   </div>
@@ -93,7 +107,7 @@ onMounted(randomiseList);
       :disabled="selectedEntries.isEmpty"
       title="Keep the button held down to randomise the list entries multiple times."
     >
-      Re-randomise list
+      {{ options.randomiseButtonLabel }}
     </button>
 
     <ShareCopyButton class="mr-0" :value="randomEntriesAsText" :disabled="selectedEntries.isEmpty"
