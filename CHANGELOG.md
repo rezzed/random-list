@@ -1,6 +1,6 @@
 # random-list Changelog
 
-## next
+## 1.1.0 (2022-05-04)
 
 - Changed text input focus behaviour to select all text on focus.
 - Added a music option, and some weird sounding chiptunes.
