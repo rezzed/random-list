@@ -79,10 +79,6 @@ function sortList() {
     </div>
   </div>
 
-  <div class="content">
-    <ShareList></ShareList>
-  </div>
-
   <div class="content is-flex is-justify-content-space-between">
     <div>
       <div class="buttons">
@@ -120,5 +116,9 @@ function sortList() {
       <span class="is-hidden-mobile">Randomise entries</span>
       <span class="is-hidden-tablet">Randomise</span>
     </LinkButton>
+  </div>
+
+  <div class="content">
+    <ShareList></ShareList>
   </div>
 </template>
